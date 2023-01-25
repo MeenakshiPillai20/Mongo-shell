@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mongo Shell</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@1,400;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Working with Mongo Shell</h1>
+    <h2> To show list of Databases </h2>
+    <p class="box">show dbs</p>
+
+
+    <h2> To view current Database </h2>
+    <p class="box">db</p>
+
+
+    <h2> To switch to another database or to create </h2>
+    <p class="box">use Human_Resource</p>
+
+
+    <h2> To create a collection </h2>
+    <h3>Two ways to insert document inside collections <span> --> Note : should insert atleast one document.</span></h3>
+    <p><span>Only one insertion --></span> 
+    <pre class="box">
+        db.employee.insertOne ( [
+        {
+           "firstName": "John",
+           "lastName": "Doe",
+           "salary": "25000",
+           "department": "HR",
+           "lastCompany": "X",
+           "lastSalary": "10000",
+           "overallExp": "2",
+           "contactInfo": "1234567890",
+           "yearGrad": "2016",
+           "gradStream": "CSE"
+      } ] )</pre></p>
+
+    <p><span>Multiple Insertion --></span> 
+    <pre class="box">
+    db.employee.insertMany ( [
+      {
+        "firstName": "John",
+        "lastName": "Doe",
+        "salary": "25000",
+        "department": "HR",
+        "lastCompany": "X",
+        "lastSalary": "10000",
+        "overallExp": "2",
+        "contactInfo": "1234567890",
+        "yearGrad": "2016",
+        "gradStream": "CSE"
+      }, {
+        "firstName": "Jame",
+        "lastName": "Doe",
+        "salary": "35000",
+        "department": "Accounts",
+        "lastCompany": "Z",
+        "lastSalary": "15000",
+        "overallExp": "2",
+        "contactInfo": "123567890",
+        "yearGrad": "2019",
+        "gradStream": "EEE"
+      } ] ) </pre></p>
+
+
+    <h2> To view the all the documents in the collection</h2>
+    <p class="box">db.employee.find().pretty()</p>
+
+    <h2> To only view the document whose <em>only One </em>key value pair is matching, i.e whose gradStream is 'EEE'</h2>
+    <p class="box">db.employee.findOne ( { gradStream:"EEE" } )</p>
+
+    <h2> To only view the document whose <em>multiple</em> key value pair is matching, i.e whose gradStream is 'EEE' and lastName is 'roh'</h2>
+    <pre class="box">
+        db.employee.find ( {
+            gradStream:"EEE",
+            lastName:"roh"
+         } )</pre>
+
+
+    <h2> To view document in which array is matching</h2>
+    <pre class="box">
+        db.students.find ( { 
+           courses: ["HTML","Java","PHP"]
+        } )</pre>
+     
+    
+    <h2> To view document in which array is matching</h2>
+    <p class="box">db.students.find ( { courses: { $all:["CSS"] } } )</p>
+
+    <h2> To view document in which array is matching</h2>
+    <p class="box">db.students.find ( { courses: { $in:["HTML"] } } )</p>
+
+    <h2> To Update with only one data</h2>
+    <pre class="box">
+        db.student.updateOne (
+          { firstName:"Meenakshi" },
+          { $set:{cgpa:9.5 } }
+        )</pre>
+
+    <h2> To Update with multiple data</h2>
+    <pre class="box">
+        db.student.updateOne (
+            { firstName:"Meenakshi",cgpa:9 },
+            { $set:{ cgpa:9.5 } }
+        )</pre>
+
+</div>
+</body>
+</html>
